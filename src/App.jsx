@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 
@@ -19,7 +19,9 @@ function App() {
   const [writtenMarks, setWrittenMarks] = useState([]);
 
   function handleButtonMark(indx) {
-    setWrittenMarks((prevItem) => [...prevItem, indx]);
+    setWrittenMarks((prevItem) =>
+      prevItem.includes(indx) ? prevItem : [...prevItem, indx]
+    );
 
     setTicButtons((prevItem) => {
       const updated = [...prevItem];
@@ -40,7 +42,16 @@ function App() {
     );
   });
 
-  console.log(writtenMarks);
+  //isWin to check if all values in writtenMarks are there in winningSet
+  const isWin = winningSet.some((combination) =>
+    combination.every((item) => writtenMarks.includes(item))
+  );
+
+  console.log(isWin);
+  /*  useEffect(() => {
+    console.log(isWin, "isWin");
+    console.log(writtenMarks, "writtenmarks");
+  }, [writtenMarks]); */
 
   return (
     <>
