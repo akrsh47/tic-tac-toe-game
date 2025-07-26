@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
   const [ticButtons, setTicButtons] = useState(Array(9).fill(""));
+  const [player, setPlayer] = useState(true);
 
   const winningSet = [
     [0, 1, 2],
@@ -16,19 +17,31 @@ function App() {
     [2, 4, 6],
   ];
 
-  const [writtenMarks, setWrittenMarks] = useState([]);
+  const [writtenMarks1, setWrittenMarks1] = useState([]);
+  const [writtenMarks2, setWrittenMarks2] = useState([]);
 
   function handleButtonMark(indx) {
-    setWrittenMarks((prevItem) =>
-      prevItem.includes(indx) ? prevItem : [...prevItem, indx]
-    );
+    if (player) {
+      setWrittenMarks1((prevItem) =>
+        prevItem.includes(indx) ? prevItem : [...prevItem, indx]
+      );
+    } else {
+      setWrittenMarks2((prevItem) =>
+        prevItem.includes(indx) ? prevItem : [...prevItem, indx]
+      );
+    }
 
     setTicButtons((prevItem) => {
       const updated = [...prevItem];
-      updated[indx] = "X";
 
+      if (player) {
+        updated[indx] = "X";
+      } else {
+        updated[indx] = "O";
+      }
       return updated;
     });
+    setPlayer((prevVal) => !prevVal);
   }
   const renderTicButtons = ticButtons.map((button, index) => {
     return (
@@ -43,15 +56,16 @@ function App() {
   });
 
   //isWin to check if all values in writtenMarks are there in winningSet
-  const isWin = winningSet.some((combination) =>
-    combination.every((item) => writtenMarks.includes(item))
+  const isWin1 = winningSet.some((combination) =>
+    combination.every((item) => writtenMarks1.includes(item))
   );
 
-  console.log(isWin);
-  /*  useEffect(() => {
-    console.log(isWin, "isWin");
-    console.log(writtenMarks, "writtenmarks");
-  }, [writtenMarks]); */
+  const isWin2 = winningSet.some((combination) =>
+    combination.every((item) => writtenMarks2.includes(item))
+  );
+
+  console.log(isWin1, "player1");
+  console.log(isWin2, "player2");
 
   return (
     <>
