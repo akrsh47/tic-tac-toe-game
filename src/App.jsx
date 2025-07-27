@@ -17,8 +17,8 @@ function App() {
     [2, 4, 6],
   ];
 
-  const [writtenMarks1, setWrittenMarks1] = useState([]);
-  const [writtenMarks2, setWrittenMarks2] = useState([]);
+  const [writtenMarks1, setWrittenMarks1] = useState([]); //button numbers marked by player1
+  const [writtenMarks2, setWrittenMarks2] = useState([]); //button numbers marked by player2
 
   function handleButtonMark(indx) {
     if (player) {
@@ -64,24 +64,27 @@ function App() {
     combination.every((item) => writtenMarks2.includes(item))
   );
 
-  console.log(isWin1, "player1");
-  console.log(isWin2, "player2");
-
   return (
     <>
-      <h1>XO</h1>
-      <section>
-        <h3>
-          <span>X</span> Player 1
-        </h3>
-        <h3>
-          <span>O</span> Player 2
-        </h3>
-      </section>
+      <div>
+        <i className="fa-solid fa-sun"></i>
+      </div>
+      <div className="heading">
+        <div>X O</div>
+        <div>Tic. Tac. Win.</div>
+      </div>
+      <main>
+        <section className="playerStatus">
+          <h3 className={player ? "p1" : ""}>
+            <span className="X">X</span>Player 1
+          </h3>
+          <h3 className={player === false ? "p2" : ""}>
+            <span className="O">O</span>Player 2
+          </h3>
+        </section>
 
-      <section>Game Status: Playing...</section>
-      <br></br>
-      <section className="ticSec">{renderTicButtons}</section>
+        <section className="ticSec">{renderTicButtons}</section>
+      </main>
     </>
   );
 }
