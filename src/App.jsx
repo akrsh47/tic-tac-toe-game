@@ -64,27 +64,42 @@ function App() {
     combination.every((item) => writtenMarks2.includes(item))
   );
 
+  console.log(player);
+
   return (
     <>
-      <div>
-        <i className="fa-solid fa-sun"></i>
-      </div>
-      <div className="heading">
-        <div>X O</div>
-        <div>Tic. Tac. Win.</div>
-      </div>
+      <section className="headSection">
+        <div className="theme">
+          <i className="fa-solid fa-sun"></i>
+        </div>
+        <div className="heading">
+          <div>X O</div>
+          <div>Tic. Tac. Win.</div>
+        </div>
+      </section>
       <main>
         <section className="playerStatus">
-          <h3 className={player ? "p1" : ""}>
-            <span className="X">X</span>Player 1
+          <h3
+            className={player ? "p1" : ""}
+            style={player ? { opacity: 1 } : { opacity: 0.3 }}
+          >
+            <span className="X">X</span> Player1
           </h3>
-          <h3 className={player === false ? "p2" : ""}>
-            <span className="O">O</span>Player 2
+          <hr></hr>
+          <h3
+            className={player === false ? "p2" : ""}
+            style={player === false ? { opacity: 1 } : { opacity: 0.3 }}
+          >
+            <span className="O">O</span> Player2
           </h3>
         </section>
+        <hr></hr>
 
         <section className="ticSec">{renderTicButtons}</section>
       </main>
+      <footer>
+        <a href="#">👽 Akarsh</a>
+      </footer>
     </>
   );
 }

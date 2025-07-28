@@ -1,38 +1,119 @@
 :root {
-  --plain-white: #fff6fc;
-  --dark-maroon: #2f0120;
-  --light-maroon: #50103c;
+  --heading-text: #fff6fc;
+  --heading-bg: #2f0120;
+  --bg: #50103c;
   --brand-highlight: #df20a3;
-  --line-highlight-d: #c388b1;
-
+  --line-highlight: #c388b1;
+  --box-button: #fff6fc;
+  --footer: #c388b1;
   --brand: #c83599;
-  --line-highlight-l: #6b4860;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "readex pro";
 }
+
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--bg);
+  min-height: 100vh;
+  width: 100%;
 }
 
 .ticSec {
-  width: auto;
   display: grid;
   grid-template-rows: auto auto auto;
   grid-template-columns: auto auto auto;
-  gap: 20px;
+  gap: 26px;
+  max-width: 100%;
+  margin-top: 2rem;
 }
 
 .ticButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 63px;
   height: 63px;
+  background-color: var(--box-button);
+  color: var(--heading-bg);
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 900;
 }
 
 button {
   color: white;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.headSection {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--heading-bg);
+  width: 100%;
+  color: var(--heading-text);
+  min-height: 195px;
+}
+
+.theme > i {
+  text-align: right;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0 21px;
+  cursor: pointer;
+
+  font-size: 22px;
+}
+
+.heading {
+  padding-left: 21px;
+}
+
+.heading > div:first-child {
+  font-size: 4rem;
+  font-weight: bold;
+}
+.heading > div:last-child {
+  font-size: 2rem;
+  opacity: 0.7;
+}
+.playerStatus {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  font-size: 20px;
+  padding-top: 2rem;
+  color: var(--brand-highlight);
+}
+.playerStatus > hr {
+  height: 2.5rem;
+  margin: 0 0.5rem;
+  border: 2px solid var(--line-highlight);
+}
+.playerStatus > h3 {
+  padding: 0.5rem;
+}
+main > hr {
+  width: 16.5rem;
+  border: 2px solid var(--line-highlight);
+}
+footer {
+  font-size: 1rem;
+  position: fixed;
+
+  text-align: center;
+  width: 100%;
+  margin-top: 6rem;
+}
+footer > a {
+  color: var(--footer);
+  text-decoration: none;
 }
