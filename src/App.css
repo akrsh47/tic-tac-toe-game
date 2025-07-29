@@ -15,7 +15,9 @@
   padding: 0;
   font-family: "readex pro";
 }
-
+html {
+  height: 100%;
+}
 body {
   background-color: var(--bg);
   min-height: 100vh;
@@ -90,7 +92,7 @@ main {
   align-items: flex-end;
   width: 100%;
   font-size: 20px;
-  padding-top: 2rem;
+  padding-top: 1rem;
   color: var(--brand-highlight);
 }
 .playerStatus > hr {
@@ -100,6 +102,13 @@ main {
 }
 .playerStatus > h3 {
   padding: 0.5rem;
+  font-weight: 200;
+}
+.X {
+  font-weight: 900;
+}
+.O {
+  font-weight: 900;
 }
 main > hr {
   width: 16.5rem;
@@ -116,4 +125,12 @@ footer {
 footer > a {
   color: var(--footer);
   text-decoration: none;
+}
+
+.winMsg {
+  margin-top: 1rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #35c84b;
+  text-shadow: 2px 2px #012d08;
 }

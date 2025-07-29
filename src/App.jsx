@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Confetti from "react-confetti";
 import "./App.css";
 
 function App() {
@@ -64,7 +64,7 @@ function App() {
     combination.every((item) => writtenMarks2.includes(item))
   );
 
-  console.log(player);
+  const Winner = isWin1 ? "Player1" : isWin2 ? "Player2" : "none";
 
   return (
     <>
@@ -78,6 +78,12 @@ function App() {
         </div>
       </section>
       <main>
+        {Winner != "none" ? <Confetti /> : null}
+        {Winner != "none" ? (
+          <section className="winMsg">
+            <div>{`🎊 ${Winner} is the Winner 🎊`}</div>
+          </section>
+        ) : null}
         <section className="playerStatus">
           <h3
             className={player ? "p1" : ""}
@@ -98,7 +104,9 @@ function App() {
         <section className="ticSec">{renderTicButtons}</section>
       </main>
       <footer>
-        <a href="#">👽 Akarsh</a>
+        <a href="https://github.com/akrsh47" target="_blank">
+          👽 Akarsh
+        </a>
       </footer>
     </>
   );
