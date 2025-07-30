@@ -64,7 +64,15 @@ function App() {
     combination.every((item) => writtenMarks2.includes(item))
   );
 
-  const Winner = isWin1 ? "Player1" : isWin2 ? "Player2" : "none";
+  let Winner = isWin1 ? "Player1" : isWin2 ? "Player2" : "none";
+
+  function resetGame() {
+    setWrittenMarks1([]);
+    setWrittenMarks2([]);
+    setPlayer(true);
+    Winner = "none";
+    setTicButtons(Array(9).fill(""));
+  }
 
   return (
     <>
@@ -102,12 +110,18 @@ function App() {
         <hr></hr>
 
         <section className="ticSec">{renderTicButtons}</section>
+        {Winner != "none" ? (
+          <button className="newGameBtn" onClick={resetGame}>
+            Replay ?
+          </button>
+        ) : null}
+
+        <footer>
+          <a href="https://github.com/akrsh47" target="_blank">
+            👽 Akarsh
+          </a>
+        </footer>
       </main>
-      <footer>
-        <a href="https://github.com/akrsh47" target="_blank">
-          👽 Akarsh
-        </a>
-      </footer>
     </>
   );
 }
