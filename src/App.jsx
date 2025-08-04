@@ -21,27 +21,29 @@ function App() {
   const [writtenMarks2, setWrittenMarks2] = useState([]); //button numbers marked by player2
 
   function handleButtonMark(indx) {
-    if (player) {
-      setWrittenMarks1((prevItem) =>
-        prevItem.includes(indx) ? prevItem : [...prevItem, indx]
-      );
-    } else {
-      setWrittenMarks2((prevItem) =>
-        prevItem.includes(indx) ? prevItem : [...prevItem, indx]
-      );
-    }
-
-    setTicButtons((prevItem) => {
-      const updated = [...prevItem];
-
+    if (Winner === "none") {
       if (player) {
-        updated[indx] = "X";
+        setWrittenMarks1((prevItem) =>
+          prevItem.includes(indx) ? prevItem : [...prevItem, indx]
+        );
       } else {
-        updated[indx] = "O";
+        setWrittenMarks2((prevItem) =>
+          prevItem.includes(indx) ? prevItem : [...prevItem, indx]
+        );
       }
-      return updated;
-    });
-    setPlayer((prevVal) => !prevVal);
+
+      setTicButtons((prevItem) => {
+        const updated = [...prevItem];
+
+        if (player) {
+          updated[indx] = "X";
+        } else {
+          updated[indx] = "O";
+        }
+        return updated;
+      });
+      setPlayer((prevVal) => !prevVal);
+    }
   }
   const renderTicButtons = ticButtons.map((button, index) => {
     return (
@@ -74,19 +76,50 @@ function App() {
     setTicButtons(Array(9).fill(""));
   }
 
+  const [theme, setTheme] = useState("dark");
+  const root = document.documentElement;
+  if (theme === "dark") {
+    root.style.setProperty("--heading-text", "#fff6fc");
+    root.style.setProperty("--heading-bg", "#2f0120");
+    root.style.setProperty("--bg", "#50103c");
+    root.style.setProperty("--brand-highlight", "#df20a3");
+    root.style.setProperty("--line-highlight", "#c388b1");
+    root.style.setProperty("--box-button", "#fff6fc");
+    root.style.setProperty("--footer", "#c388b1");
+    root.style.setProperty("--brand", "#c83599");
+    root.style.setProperty("--win-color", "#35c84b");
+  } else if (theme === "light") {
+    root.style.setProperty("--heading-text", "#C83599");
+    root.style.setProperty("--heading-bg", "#FEE8F7");
+    root.style.setProperty("--bg", "#FFFFFF");
+    root.style.setProperty("--brand-highlight", "#df20a3");
+    root.style.setProperty("--line-highlight", "#6B4860");
+    root.style.setProperty("--box-button", "#2F0120");
+    root.style.setProperty("--footer", "#6B4860");
+    root.style.setProperty("--brand", "#c83599");
+    root.style.setProperty("--win-color", "#10701E");
+  }
+  function changeTheme() {
+    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  }
+
   return (
     <>
       <section className="headSection">
-        <div className="theme">
-          <i className="fa-solid fa-sun"></i>
-        </div>
+        <button className="theme" onClick={changeTheme}>
+          {theme === "dark" ? (
+            <i className="fa-solid fa-sun"></i>
+          ) : (
+            <i className="fa-solid fa-moon"></i>
+          )}
+        </button>
         <div className="heading">
           <div>X O</div>
           <div>Tic. Tac. Win.</div>
         </div>
       </section>
       <main>
-        {Winner != "none" ? <Confetti /> : null}
+        {Winner != "none" ? <Confetti numberOfPieces={100} /> : null}
         {Winner != "none" ? (
           <section className="winMsg">
             <div>{`🎊 ${Winner} is the Winner 🎊`}</div>
