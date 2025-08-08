@@ -68,6 +68,10 @@ function App() {
 
   let Winner = isWin1 ? "Player1" : isWin2 ? "Player2" : "none";
 
+  if (ticButtons.every((val) => val != "") && Winner === "none") {
+    Winner = "draw";
+  }
+
   function resetGame() {
     setWrittenMarks1([]);
     setWrittenMarks2([]);
@@ -119,10 +123,16 @@ function App() {
         </div>
       </section>
       <main>
-        {Winner != "none" ? <Confetti numberOfPieces={100} /> : null}
+        {Winner != "none" && Winner != "draw" ? (
+          <Confetti numberOfPieces={100} />
+        ) : null}
         {Winner != "none" ? (
           <section className="winMsg">
-            <div>{`🎊 ${Winner} is the Winner 🎊`}</div>
+            {Winner != "draw" ? (
+              <div>{`🎊 ${Winner} is the Winner 🎊`}</div>
+            ) : (
+              <div style={{ color: "#3595C8" }}>⚔️ It's a draw. ⚔️</div>
+            )}
           </section>
         ) : null}
         <section className="playerStatus">
